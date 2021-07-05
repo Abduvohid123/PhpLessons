@@ -1,0 +1,76 @@
+1. procedura yaratish
+DELIMITER //
+
+CREATE PROCEDURE procedure_name()
+BEGIN
+	SELECT *  FROM table_name;
+END //
+
+DELIMITER ;
+
+
+
+2. procedura statusini aniqlash
+
+SHOW PROCEDURE STATUS WHERE Db = 'db_name';
+
+3. procedura o'chirish
+drop procedure procedure_name
+
+
+4. jadval yaratish
+create table countries(id int(6) auto_increment primary key,name varchar(56));
+
+
+
+proceduralar -----
+
+DELIMITER //
+
+CREATE PROCEDURE delete_country(in Iddd int(6))
+BEGIN
+	delete from countries where id=Iddd;
+END //
+
+DELIMITER ;
+--------------------------------------
+DELIMITER //
+
+CREATE PROCEDURE find_country(in Iddd int(6))
+BEGIN
+	SELECT name  FROM countries where id=Iddd;
+END //
+
+DELIMITER ;
+--------------------------------------
+
+DELIMITER //
+
+CREATE PROCEDURE get_all_countries()
+BEGIN
+	select * from countries;
+END //
+
+DELIMITER ;
+--------------------------------------
+
+DELIMITER //
+
+CREATE PROCEDURE insert_country(in country_name varachar(55)
+BEGIN
+	insert into countries(name) values(country_name);
+END //
+
+DELIMITER ;
+--------------------------------------
+
+DELIMITER //
+
+CREATE PROCEDURE update_country(in Iddd int(6), country_name varachar(55)
+BEGIN
+	update countries set name=country_name where id=Iddd;
+END //
+
+DELIMITER ;
+--------------------------------------
+
