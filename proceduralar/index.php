@@ -48,13 +48,13 @@ if (isset($_POST['btn_add'])) {
                                    name="country_name">
                         </div>
                         <div class="form-group">
-                            <row>
+
 
                                 <div class="col-4 offset-4">
                                     <input type="submit" name="btn_add" class="btn btn-block btn-primary" value="Add">
                                 </div>
 
-                            </row>
+
                         </div>
                     </form>
                     <br>
