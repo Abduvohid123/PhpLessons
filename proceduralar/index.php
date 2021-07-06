@@ -25,7 +25,7 @@ if (isset($_POST['btn_add'])) {
     $insert_sql = "call insert_country('" . $_POST['country_name'] . "')";
 
     if (mysqli_query($connect, $insert_sql)) {
-        header('location:index.php?inserted=1');
+        header('location:index.html?inserted=1');
     }
 }
 ?>

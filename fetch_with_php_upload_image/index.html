@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <title>Title</title>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-8 offset-2">
+            <div class="card">
+                <div class="card-header">
+                    Rasm yuklash
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <th><b>Select Image</b></th>
+                            <th>
+                                <input type="file" name="image">
+                            </th>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-8 offset-2 mt-3">
+            <div id="uploaded_image" class="text-center mt-3"></div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+<script>
+    const image = document.getElementsByName('image')[0];
+    const xabar = document.getElementById('uploaded_image');
+
+    image.addEventListener('change', function () {
+        uploaded_image(image.files[0]);
+    })
+
+    function uploaded_image(file) {
+
+        if (!['image/jpeg', 'image/png'].includes(file.type)) {
+            xabar.innerHTML = '<div class="alert alert-danger">faqat jpg va png formatlariga ruxsat bor!</div>';
+            image.value = '';
+            return;
+        }
+        if (file.size > 2 * 1024 * 1024) {
+            xabar.innerHTML = '<div class="alert alert-danger">Rasm  hajmi 2 mb dan ko\'p bo\'lmasligi kerak!</div>';
+            image.value = '';
+            return;
+        }
+
+        const form_data = new FormData();
+        form_data.append('image', file);
+
+        fetch('upload.php', {
+            method: "post",
+            body: form_data
+        }).then(function (response) {
+            return response.json();
+        }).then(function (response_data) {
+            xabar.innerHTML = '<div class="alert success">Rasm  muvaffaqiyatli yuklandi!</div>' +
+                '<img src="' + response_data.image_source + '" class="img-thumbnail">'
+            image.value = '';
+
+        })
+    }
+
+</script>
+
+</body>
+</html>
